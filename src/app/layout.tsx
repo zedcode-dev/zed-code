@@ -1,8 +1,37 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { CustomCursor } from "@/components/common/CustomCursor";
 import { ToastContainer } from "@/components/common/Toast";
 import { ContactModalProvider } from "@/context/ContactModalContext";
 import "./globals.css";
+
+// Optimized font loading with next/font
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+// JSON-LD Structured Data for Organization
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Zed Code",
+  url: "https://zcode.site",
+  logo: "https://zcode.site/icon.png",
+  description: "Elite coding solutions for the next generation. Web development, mobile apps, API architecture, and custom solutions.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "contact@zcode.site",
+    contactType: "customer service",
+  },
+  sameAs: [
+    "https://github.com/zedcode-dev",
+    "https://linkedin.com/company/zedcode-dev",
+    "https://instagram.com/zedcode-dev",
+    "https://tiktok.com/@zedcode-dev",
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://zcode.site'),
@@ -14,6 +43,9 @@ export const metadata: Metadata = {
   keywords: ["web development", "mobile apps", "API", "software engineering", "coding solutions", "nextjs", "react", "typescript"],
   authors: [{ name: "Zed Code", url: "https://zcode.site" }],
   creator: "Zed Code",
+  alternates: {
+    canonical: "https://zcode.site",
+  },
   openGraph: {
     title: "ZED CODE | Engineering The Future",
     description: "Elite coding solutions for the next generation",
@@ -50,16 +82,11 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  icons: {
-    icon: "/favicon.ico?v=4",
-    apple: "/apple-icon.png?v=4",
-    shortcut: "/favicon.ico?v=4",
-  },
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -68,8 +95,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className={inter.variable}>
+      <head>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="antialiased font-sans">
         <CustomCursor />
         <ToastContainer />
         {/* Skip Link for Accessibility */}

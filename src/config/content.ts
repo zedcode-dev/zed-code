@@ -50,25 +50,29 @@ export const siteContent = {
                         id: "frontend",
                         icon: "Globe",
                         title: "Frontend Development",
-                        description: "Modern, responsive interfaces built with React, Next.js, TypeScript, and Tailwind CSS. Performance-optimized for seamless user experience.",
+                        description:
+                            "Modern, responsive interfaces built with React, Next.js, TypeScript, and Tailwind CSS. Optimized for performance and smooth user experience.",
                     },
                     {
                         id: "backend",
                         icon: "Server",
                         title: "Backend Development",
-                        description: "Scalable APIs with Node.js, Express.js, PHP, and Laravel. PostgreSQL & MongoDB databases. Secure, efficient, production-ready.",
+                        description:
+                            "API-driven backend logic ready for integration with databases and services. Built with Node.js, Express.js, PHP, and Laravel when required.",
                     },
                     {
                         id: "fullstack",
                         icon: "Code",
                         title: "Full-Stack Solutions",
-                        description: "Complete application development from architecture to deployment on AWS & Vercel. Docker-powered, built for scale and reliability.",
+                    description:
+                        "Complete application development from architecture to deployment. Designed for scalable, reliable apps and smooth production rollout.",
                     },
                     {
                         id: "design",
                         icon: "Palette",
                         title: "UI/UX Design",
-                        description: "Strategic interface design focused on conversion. Figma prototyping with clean aesthetics and data-driven user experience.",
+                        description:
+                            "Strategic interface design focused on conversion. Figma prototyping with clean aesthetics and user-centered experience.",
                     },
                 ],
             },
@@ -97,7 +101,7 @@ export const siteContent = {
                         color: "from-rose-500 to-red-600",
                         thumbnail: "/portfolio/dxlr-brand.png",
                         stats: { type: "E-commerce", status: "Production" },
-                        year: "2024",
+                        year: "2025",
                         url: "https://dxlr-brand.vercel.app/",
                     },
                     {
@@ -109,7 +113,7 @@ export const siteContent = {
                         color: "from-emerald-600 to-teal-600",
                         thumbnail: "/portfolio/afaq-realty.png",
                         stats: { type: "Real Estate", status: "Live" },
-                        year: "2024",
+                        year: "2025",
                         url: "https://afaq-realty.vercel.app/en",
                     },
                 ],

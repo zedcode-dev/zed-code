@@ -1,11 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-
-
-
+import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Globe, Server, Palette, Code, Check, Quote, Sparkles, Github, Instagram, Linkedin } from "lucide-react";
 import { TiktokIcon } from "@/components/common/Icons";
 import { siteContent } from "@/config/content";
@@ -19,8 +16,6 @@ import {
   ScrollIndicator,
 } from "@/components/fullpage/FullpageScroll";
 import { TextReveal, Magnetic } from "@/components/animations";
-import { MouseParallax } from "@/components/animations/MouseParallax";
-import { AnimatedCounter } from "@/components/common/AnimatedCounter";
 import Image from "next/image";
 import { ContactModal } from "@/components/contact/ContactModal";
 
@@ -44,34 +39,19 @@ export default function Home() {
           {/* Background Grid */}
           <div className="absolute inset-0 bg-grid" />
 
-          {/* Animated Gradient Orbs - Larger and more vibrant */}
-          <div className="absolute inset-0 z-0">
-            <motion.div
-              className="absolute top-0 left-0 w-[800px] h-[800px] bg-gradient-to-br from-purple-200 to-purple-100 rounded-full mix-blend-multiply filter blur-[120px] opacity-40"
-              animate={{
-                x: [-100, 100, -100],
-                y: [-50, 100, -50],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          {/* Animated Gradient Orbs - CSS-only on mobile for performance */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            {/* Purple Orb - uses CSS animation on mobile, Framer Motion on desktop */}
+            <div
+              className="absolute top-0 left-0 w-[400px] h-[400px] lg:w-[800px] lg:h-[800px] bg-gradient-to-br from-purple-200 to-purple-100 rounded-full blur-[80px] lg:blur-[120px] opacity-40 animate-blob"
             />
-            <motion.div
-              className="absolute top-1/4 right-0 w-[700px] h-[700px] bg-gradient-to-br from-amber-100 to-yellow-100 rounded-full mix-blend-multiply filter blur-[120px] opacity-40"
-              animate={{
-                x: [50, -100, 50],
-                y: [0, 150, 0],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+            {/* Yellow Orb */}
+            <div
+              className="absolute top-1/4 right-0 w-[350px] h-[350px] lg:w-[700px] lg:h-[700px] bg-gradient-to-br from-amber-100 to-yellow-100 rounded-full blur-[80px] lg:blur-[120px] opacity-40 animate-blob animation-delay-2000"
             />
-            <motion.div
-              className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-pink-100 to-rose-100 rounded-full mix-blend-multiply filter blur-[120px] opacity-40"
-              animate={{
-                x: [0, 80, 0],
-                y: [50, -50, 50],
-                scale: [1, 1.15, 1],
-              }}
-              transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 10 }}
+            {/* Pink Orb */}
+            <div
+              className="absolute bottom-0 left-1/4 w-[300px] h-[300px] lg:w-[600px] lg:h-[600px] bg-gradient-to-br from-pink-100 to-rose-100 rounded-full blur-[80px] lg:blur-[120px] opacity-40 animate-blob animation-delay-4000"
             />
           </div>
 

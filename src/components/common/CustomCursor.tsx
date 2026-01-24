@@ -1,32 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export function CustomCursor() {
     const [isHovered, setIsHovered] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
 
     // Mouse position
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth springs for cursor movement
-    const cursorX = useSpring(mouseX, { stiffness: 500, damping: 28 });
-    const cursorY = useSpring(mouseY, { stiffness: 500, damping: 28 });
+    // Smooth springs for cursor movement - reduced stiffness for better performance
+    const cursorX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+    const cursorY = useSpring(mouseY, { stiffness: 300, damping: 30 });
 
-    // Slightly delayed follower
-    const followerX = useSpring(mouseX, { stiffness: 250, damping: 20 });
-    const followerY = useSpring(mouseY, { stiffness: 250, damping: 20 });
+    // Slightly delayed follower - reduced stiffness
+    const followerX = useSpring(mouseX, { stiffness: 150, damping: 25 });
+    const followerY = useSpring(mouseY, { stiffness: 150, damping: 25 });
 
-    // Mark as mounted after hydration
+    // Check if desktop on mount
     useEffect(() => {
+        const checkDesktop = () => {
+            setIsDesktop(window.innerWidth >= 1024 && !('ontouchstart' in window));
+        };
+        checkDesktop();
         setMounted(true);
+
+        window.addEventListener("resize", checkDesktop);
+        return () => window.removeEventListener("resize", checkDesktop);
     }, []);
 
+    const handleLinkHover = useCallback(() => setIsHovered(true), []);
+    const handleLinkLeave = useCallback(() => setIsHovered(false), []);
+
     useEffect(() => {
-        if (!mounted) return;
+        // Only run on desktop
+        if (!mounted || !isDesktop) return;
 
         const handleMouseMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
@@ -38,10 +50,7 @@ export function CustomCursor() {
         const handleMouseLeave = () => setIsVisible(false);
         const handleMouseEnter = () => setIsVisible(true);
 
-        const handleLinkHover = () => setIsHovered(true);
-        const handleLinkLeave = () => setIsHovered(false);
-
-        document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mousemove", handleMouseMove, { passive: true });
         document.addEventListener("mouseleave", handleMouseLeave);
         document.addEventListener("mouseenter", handleMouseEnter);
 
@@ -61,15 +70,13 @@ export function CustomCursor() {
                 el.removeEventListener("mouseleave", handleLinkLeave);
             });
         };
-    }, [mouseX, mouseY, isVisible, mounted]);
+    }, [mouseX, mouseY, isVisible, mounted, isDesktop, handleLinkHover, handleLinkLeave]);
 
     useEffect(() => {
-        if (!mounted) return;
+        // Only run on desktop
+        if (!mounted || !isDesktop) return;
 
         const observer = new MutationObserver((mutations) => {
-            const handleLinkHover = () => setIsHovered(true);
-            const handleLinkLeave = () => setIsHovered(false);
-
             mutations.forEach((mutation) => {
                 if (mutation.type === 'childList') {
                     mutation.addedNodes.forEach((node) => {
@@ -91,24 +98,22 @@ export function CustomCursor() {
 
         observer.observe(document.body, { childList: true, subtree: true });
         return () => observer.disconnect();
-    }, [mounted]);
+    }, [mounted, isDesktop, handleLinkHover, handleLinkLeave]);
 
-    // Don't render until mounted to prevent hydration mismatch
-    if (!mounted) return null;
+    // Don't render on mobile/tablet or before mount
+    if (!mounted || !isDesktop) return null;
 
     return (
         <>
             <style jsx global>{`
-        * { cursor: none !important; }
-        @media (max-width: 1024px) {
-            * { cursor: auto !important; }
-            .custom-cursor { display: none !important; }
-        }
-      `}</style>
+                @media (min-width: 1024px) {
+                    * { cursor: none !important; }
+                }
+            `}</style>
 
             {/* Main dot */}
             <motion.div
-                className="custom-cursor fixed top-0 left-0 w-3 h-3 bg-gray-900 border border-white rounded-full pointer-events-none z-[9999]"
+                className="fixed top-0 left-0 w-3 h-3 bg-gray-900 border border-white rounded-full pointer-events-none z-[9999]"
                 style={{
                     x: cursorX,
                     y: cursorY,
@@ -120,7 +125,7 @@ export function CustomCursor() {
 
             {/* Follower ring */}
             <motion.div
-                className="custom-cursor fixed top-0 left-0 w-8 h-8 border border-gray-900 bg-white/10 backdrop-invert rounded-full pointer-events-none z-[9998]"
+                className="fixed top-0 left-0 w-8 h-8 border border-gray-900 rounded-full pointer-events-none z-[9998]"
                 style={{
                     x: followerX,
                     y: followerY,
@@ -133,7 +138,7 @@ export function CustomCursor() {
                     borderColor: isHovered ? "rgba(255, 255, 255, 0.8)" : "rgba(23, 23, 23, 1)",
                     backgroundColor: isHovered ? "rgba(23, 23, 23, 0.2)" : "transparent"
                 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.15 }}
             />
         </>
     );

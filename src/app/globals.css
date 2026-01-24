@@ -1,6 +1,3 @@
-/* Google Fonts - must be first */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @import "tailwindcss";
 
 /* ============================================
@@ -33,8 +30,8 @@
   --accent-pink: #ec4899;
   --accent-yellow: #eab308;
 
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Typography - uses next/font variable with fallbacks */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -149,34 +146,43 @@ p {
 }
 
 /* ============================================
-   Animations
+   Animations - Performance Optimized
    ============================================ */
 
 @keyframes blob {
 
   0%,
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0) scale(1);
   }
 
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
+  50% {
+    transform: translate3d(20px, -30px, 0) scale(1.05);
+  }
+}
+
+/* Simpler mobile blob animation */
+@keyframes blob-mobile {
+
+  0%,
+  100% {
+    opacity: 0.3;
   }
 
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+  50% {
+    opacity: 0.5;
   }
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -193,17 +199,26 @@ p {
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translate3d(20px, 0, 0);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* On mobile, use simpler opacity-based animation */
+@media (max-width: 1023px) {
+  .animate-blob {
+    animation: blob-mobile 8s ease-in-out infinite;
+    will-change: opacity;
+  }
 }
 
 .animation-delay-2000 {
