@@ -300,8 +300,7 @@ export default function TermsPage() {
                                     <div className="text-gray-600 leading-relaxed">
                                         <p><strong>ZED CODE</strong></p>
                                         <p>Location: Giza, Egypt</p>
-                                        <p>Email: [contact@zcode.site]</p>
-                                        <p>Website: [www.zcode.site]</p>
+                                        <p>Website: [zcode.itslab.online]</p>
                                     </div>
                                 </section>
 
