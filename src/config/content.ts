@@ -26,10 +26,9 @@ export const siteContent = {
     ] as NavItem[],
 
     social: [
-        { label: "LinkedIn", href: "https://linkedin.com/company/zedcode-dev", icon: "Linkedin" },
         { label: "GitHub", href: "https://github.com/zedcode-dev", icon: "Github" },
-        { label: "Instagram", href: "https://instagram.com/zedcode-dev", icon: "Instagram" },
-        { label: "TikTok", href: "https://tiktok.com/@zedcode-dev", icon: "Tiktok" },
+        { label: "Instagram", href: "https://www.instagram.com/zedcode.dev/", icon: "Instagram" },
+        { label: "TikTok", href: "https://www.tiktok.com/@zedcode.dev", icon: "Tiktok" },
     ],
 
     pages: {
@@ -63,8 +62,8 @@ export const siteContent = {
                         id: "fullstack",
                         icon: "Code",
                         title: "Full-Stack Solutions",
-                    description:
-                        "Complete application development from architecture to deployment. Designed for scalable, reliable apps and smooth production rollout.",
+                        description:
+                            "Complete application development from architecture to deployment. Designed for scalable, reliable apps and smooth production rollout.",
                     },
                     {
                         id: "design",

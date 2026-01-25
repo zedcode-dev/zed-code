@@ -17,8 +17,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Zed Code",
-  url: "https://zcode.site",
-  logo: "https://zcode.site/icon.png",
+  url: "https://zcode.itslab.online",
+  logo: "https://zcode.itslab.online/icon.png",
   description: "Elite coding solutions for the next generation. Web development, mobile apps, API architecture, and custom solutions.",
   contactPoint: {
     "@type": "ContactPoint",
@@ -27,29 +27,28 @@ const jsonLd = {
   },
   sameAs: [
     "https://github.com/zedcode-dev",
-    "https://linkedin.com/company/zedcode-dev",
-    "https://instagram.com/zedcode-dev",
-    "https://tiktok.com/@zedcode-dev",
+    "https://instagram.com/zedcode.dev",
+    "https://tiktok.com/@zedcode.dev",
   ],
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zcode.site'),
+  metadataBase: new URL('https://zcode.itslab.online'),
   title: {
     default: "ZED CODE | Engineering The Future",
     template: "%s | ZED CODE"
   },
   description: "Elite coding solutions for the next generation. Web development, mobile apps, API architecture, and custom solutions.",
   keywords: ["web development", "mobile apps", "API", "software engineering", "coding solutions", "nextjs", "react", "typescript"],
-  authors: [{ name: "Zed Code", url: "https://zcode.site" }],
+  authors: [{ name: "Zed Code", url: "https://zcode.itslab.online" }],
   creator: "Zed Code",
   alternates: {
-    canonical: "https://zcode.site",
+    canonical: "https://zcode.itslab.online",
   },
   openGraph: {
     title: "ZED CODE | Engineering The Future",
     description: "Elite coding solutions for the next generation",
-    url: "https://zcode.site",
+    url: "https://zcode.itslab.online",
     siteName: "ZED CODE",
     locale: "en_US",
     type: "website",

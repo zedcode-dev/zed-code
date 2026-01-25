@@ -170,7 +170,10 @@ export async function POST(request: Request) {
         // Send email
         await transporter.sendMail({
             from: `"Zed Code Website" <${process.env.SMTP_USER}>`,
-            to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+            to: (process.env.CONTACT_EMAIL || process.env.SMTP_USER || "")
+                .split(",")
+                .map(e => e.trim())
+                .filter(Boolean),
             replyTo: sanitized.email,
             subject: `New Project Inquiry: ${sanitized.projectType} from ${sanitized.name}`,
             html: htmlContent,

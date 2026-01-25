@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://zcode.site';
+    const baseUrl = 'https://zcode.itslab.online';
     const currentDate = new Date();
 
     return [
