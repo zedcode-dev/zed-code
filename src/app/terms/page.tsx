@@ -299,7 +299,7 @@ export default function TermsPage() {
                                     </p>
                                     <div className="text-gray-600 leading-relaxed">
                                         <p><strong>ZED CODE</strong></p>
-                                        <p>Location: Giza, Egypt</p>
+                                        <p>Location: Egypt</p>
                                         <p>Website: [zcode.itslab.online]</p>
                                     </div>
                                 </section>
