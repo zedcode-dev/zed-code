@@ -14,7 +14,6 @@ export const siteContent = {
         name: "ZED CODE",
         tagline: "Engineering Digital Solutions",
         email: "contact@zcode.site",
-
     },
 
     // Navigation - Portfolio is a separate page
